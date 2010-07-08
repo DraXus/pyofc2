@@ -44,6 +44,9 @@ class OFCBase(dict):
         'proximity': 'mouse', 'spoke_labels':'spoke-labels',
         'visible_steps': 'visible-steps',
         'javascript_function': 'javascript-function',
+        'on_show': 'on-show',
+        'line_style': 'line-style',
+        'key_on_click': 'key-on-click'
     }
 
     def __setattr__(self, k, w):
@@ -96,9 +99,13 @@ element = ofc_factory('element', ['type','alpha', 'colour', 'color', 'text', 'fo
 
 entry = ofc_factory('values', ['text', 'fontsize', 'colour', 'color'])
 
+effect = ofc_factory('on_show', ['type', 'cascade', 'delay'])
+
+line_style = ofc_factory('line_style', ['style', 'on', 'off'])
+
 linefactory = ofc_factory('_line', ['type','alpha', 'colour','color', 'text',
     'fontsize', 'font_size', 'values', 'halo_size', 'width', 'dot_size', 'on_click', 'tip',
-    'loop', 'dot_style', 'axis'])
+    'loop', 'dot_style', 'axis', 'on_show', 'line_style', 'key_on_click'])
 line = lambda **kw: linefactory(type='line',**kw)
 line_dot = lambda **kw: linefactory(type='line_dot', **kw)
 line_hollow = lambda **kw: linefactory(type='line_hollow', **kw)
@@ -110,11 +117,11 @@ dot = lambda **kw: dotfactory(type='solid-dot', **kw)
 hollowdot = lambda **kw: dotfactory(type='hollow-dot', **kw)
 stardot = lambda **kw: dotfactory(type='star', **kw)
 
-barfactory = ofc_factory('_bar', ['type', 'values', 'alpha', 'color', 'colour', 'key', 'on_click', 'axis'])
+barfactory = ofc_factory('_bar', ['type', 'values', 'alpha', 'color', 'colour', 'key', 'on_click', 'axis', 'text', 'font_size', 'tip', 'on_show', 'tooltip'])
 bar = lambda **kw: barfactory(type='bar',**kw)
 bar_glass = lambda **kw: barfactory(type='bar_glass',**kw)
 
-barvalue = ofc_factory('values', ['colour', 'value', 'tip', 'top', 'bottom'])
+barvalue = ofc_factory('values', ['colour', 'value', 'tip', 'top', 'bottom', 'on_click'])
 
 barfilledfactory = ofc_factory('_bar', ['type', 'values', 'alpha', 'color',
     'colour', 'key', 'outline_colour', 'outline_color'])
@@ -153,6 +160,7 @@ class open_flash_chart(OFCBase):
     'title': title,
     'x_legend':x_legend,
     'y_legend':y_legend,
+    'y2_legend':y_legend,
     'x_axis': x_axis,
     'y_axis': y_axis,
     'y_axis_right': y_axis_right,
