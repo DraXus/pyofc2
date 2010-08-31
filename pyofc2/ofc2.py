@@ -32,7 +32,7 @@ import cjson
 class OFCBase(dict):
     type = None
     replace = {
-        'font_size':'font-size', 'fontsize': 'font-size',
+        'font_size':'font-size', 'fontsize': 'font-size', 'font_size': 'font-size',
         'color':'colour', 'bg_color':'bg_colour', 'bgcolor':'bg_colour',
         'dot_size': 'dot-size', 'dotsize':'dot-size', 'grid_colour': 'grid-colour',
         'dot_style': 'dot-style',
@@ -46,7 +46,9 @@ class OFCBase(dict):
         'javascript_function': 'javascript-function',
         'on_show': 'on-show',
         'line_style': 'line-style',
-        'key_on_click': 'key-on-click'
+        'key_on_click': 'key-on-click',
+        'pad_x': 'pad-x', 'pad_y': 'pad-y',
+        'align_x': 'align-x', 'align_y': 'align-y'
     }
 
     def __setattr__(self, k, w):
@@ -109,6 +111,10 @@ linefactory = ofc_factory('_line', ['type','alpha', 'colour','color', 'text',
 line = lambda **kw: linefactory(type='line',**kw)
 line_dot = lambda **kw: linefactory(type='line_dot', **kw)
 line_hollow = lambda **kw: linefactory(type='line_hollow', **kw)
+
+tagsfactory = ofc_factory('_tags', ['type','font', 'font_size', 'colour', 'pad_x', 'pad_y', 'rotate', 'align_x', 'align_y', 'text', 'values'])
+tags = lambda **kw: linefactory(type='tags',**kw)
+tags_value = ofc_factory('tags_value', ['x', 'y', 'align_x', 'align_y', 'font', 'bold', 'font_size', 'text', 'background', 'border', 'rotate'])
 
 key = ofc_factory('key', ['text', 'size', 'colour', 'font-size'])
 dot_value = ofc_factory('value', ['value', 'colour', 'color', 'tip'])
