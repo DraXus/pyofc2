@@ -48,7 +48,10 @@ class OFCBase(dict):
         'line_style': 'line-style',
         'key_on_click': 'key-on-click',
         'pad_x': 'pad-x', 'pad_y': 'pad-y',
-        'align_x': 'align-x', 'align_y': 'align-y'
+        'align_x': 'align-x', 'align_y': 'align-y',
+        'area_style': 'area-style', 
+        'background_colour': 'background-colour',
+        'background_alpha': 'background-alpha',
     }
 
     def __setattr__(self, k, w):
@@ -146,8 +149,10 @@ area_linefactory = ofc_factory('_area_line', ['type', 'values', 'color', 'colour
 area_line = lambda **kw: area_linefactory(type='area_line', **kw)
 area_hollow = lambda **kw: area_linefactory(type='area_hollow', **kw)
 
-scatter_value = ofc_factory('values', ['x','y'])
-scatterfactory = ofc_factory('_scatter', ['type', 'dot_size', 'color', 'colour', 'values'])
+scatter_value = ofc_factory('values', ['x','y', 'type', 'alpha', 'hollow', 'background_colour', 'background_alpha', 'dot_size', 'tip', 'halo_size', 'rotation', 'sides', 'width', 'on_click'])
+scatter_area_style = ofc_factory('area_style', ['colour','alpha', 'x', 'y'])
+scatter_dot_style = ofc_factory('dot_style', ['type', 'alpha', 'hollow', 'background_colour', 'background_alpha', 'dot_size', 'tip', 'halo_size', 'rotation', 'sides', 'width', 'on_click'])
+scatterfactory = ofc_factory('_scatter', ['type', 'text', 'width', 'color', 'colour', 'dot_size', 'tip', 'area_style', 'dot_style', 'values'])
 scatter = lambda **kw: scatterfactory(type='scatter', **kw)
 scatter_line = lambda **kw: scatterfactory(type='scatter_line', **kw)
 
